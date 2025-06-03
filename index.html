@@ -1,102 +1,266 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <title>我的随便网站</title>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>联合创作与开发 · 第16周安排与作业提交</title>
+  
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
-    body {
+    /* ===== 主题变量 ===== */
+    :root {
+      --primary: #0066ff;
+      --primary-dark: #0047c8;
+      --accent: #ff7d1b;
+      --bg: #f7fafc;
+      --white: #ffffff;
+      --text: #1f2937;
+      --radius: 1rem;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    /* ===== 通用样式 ===== */
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-      color: #333;
-    }
-    header {
-      background: linear-gradient(135deg, #4f46e5, #3b82f6);
-      color: #fff;
-      padding: 2rem 1rem;
-      text-align: center;
-    }
-    nav ul {
-      list-style: none;
       padding: 0;
-      margin: 1rem 0 0;
-      display: flex;
-      justify-content: center;
+    }
+
+    body {
+      font-family: 'Nunito', 'Noto Sans SC', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.25s;
+    }
+    a:hover {
+      color: var(--accent);
+    }
+
+    /* ===== 容器 ===== */
+    .container {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* ===== 头部 ===== */
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white);
+      padding: 3rem 1.5rem;
+      text-align: center;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="%23ffffff15"><path d="M0 0h24v24H0z" fill="none"/><path d="M16.24 11.51c-.71.73-1.62 1.07-2.54 1.05h-.02c-1.71 0-3.08-1.37-3.08-3.08s1.37-3.08 3.08-3.08 3.08 1.37 3.08 3.08c0 .8-.32 1.58-.94 2.13l.42.42c.71-.73 1.12-1.72 1.12-2.75 0-2.23-1.82-4.05-4.05-4.05s-4.05 1.82-4.05 4.05 1.82 4.05 4.05 4.05c1.13 0 2.16-.46 2.84-1.23l-.39-.39z"/></svg>') repeat;
+      opacity: 0.15;
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+
+    header h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.03em;
+    }
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* ===== 卡片 Section ===== */
+    section {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem 1.75rem;
+      margin-bottom: 1.75rem;
+      box-shadow: var(--shadow);
+      animation: fadeIn 0.6s ease-in-out both;
+    }
+    section:nth-of-type(odd) {
+      animation-delay: 0.1s;
+    }
+    section:nth-of-type(even) {
+      animation-delay: 0.2s;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);} 
+      to {opacity: 1; transform: translateY(0);} 
+    }
+
+    section h2 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    section h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.3rem;
+      width: 3rem;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 2px;
+    }
+
+    ol, ul {
+      margin-left: 1.2rem;
+      padding-left: 0.3rem;
+    }
+    li + li {
+      margin-top: 0.5rem;
+    }
+
+    /* 自定义列表符号 */
+    li {
+      position: relative;
+      list-style: none;
+      padding-left: 1.4rem;
+    }
+    li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 0.6rem;
+      height: 0.6rem;
+      background: var(--primary);
+      border-radius: 50%;
+    }
+
+    /* 网格布局 */
+    .grid-2 {
+      display: grid;
       gap: 1.5rem;
     }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
+    @media (min-width: 768px) {
+      .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
-    section {
-      padding: 4rem 1rem;
-      max-width: 960px;
-      margin: auto;
+
+    /* 重点提示 */
+    .note {
+      background: #e9f2ff;
+      border-left: 5px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius);
+      margin: 1rem 0 1.5rem 0;
     }
-    section:nth-child(even) {
-      background: #f9fafb;
+
+    /* 截止日期强调 */
+    .deadline {
+      color: var(--accent);
+      font-weight: 800;
     }
+
+    /* 页脚 */
     footer {
-      background: #1f2937;
-      color: #f3f4f6;
       text-align: center;
-      padding: 2rem 1rem;
-    }
-    .btn {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      background: #3b82f6;
-      color: #fff;
-      border-radius: 0.375rem;
-      text-decoration: none;
-      transition: background 0.3s ease;
-    }
-    .btn:hover {
-      background: #2563eb;
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin-top: 3rem;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>欢迎来到我的网站</h1>
-    <p>这是一个使用纯 HTML + CSS 构建的简单示例页面。</p>
-    <nav>
+  <div class="container">
+    <header>
+      <h1>联合创作与开发</h1>
+      <p>第 16 周安排 &amp; 作业提交指南</p>
+    </header>
+
+    <!-- 1. 第16周安排 -->
+    <section>
+      <h2>1. 第 16 周安排</h2>
+      <ol>
+        <li>答辩：每组不超过 <strong>8 分钟</strong>，进行项目汇报及作品演示</li>
+        <li>游戏需准备录屏演示</li>
+        <li>网页须通过浏览器现场展示</li>
+        <li>请将 PPT 提前存入 <strong>U 盘</strong> 或在上课前上传至教师机</li>
+      </ol>
+    </section>
+
+    <!-- 2. 答辩前必做 -->
+    <section>
+      <h2>2. 答辩前必做</h2>
+      <p class="note">除跨学科选题外，所有小组须在答辩前将作品提交至 <strong>第十三届未来设计师·全国高校数字艺术设计大赛（NCDA）</strong></p>
       <ul>
-        <li><a href="#about">关于</a></li>
-        <li><a href="#features">特色</a></li>
-        <li><a href="#contact">联系</a></li>
+        <li>投递网址：<a href="https://www.ncda.org.cn/dsjs/dsnr/fmtsd/" target="_blank" rel="noopener">NCDA 官方网站</a></li>
+        <li>类别：<strong>C 类交互设计</strong></li>
+        <li>院校代码：<code>N1331033H1</code></li>
+        <li>无需缴费，等待老师审核即可</li>
+        <li>网页赛道需额外制作 <strong>60 × 80 cm</strong> 展板展示网站设计</li>
       </ul>
-    </nav>
-  </header>
+    </section>
 
-  <section id="about">
-    <h2>关于本站</h2>
-    <p>在这一部分，你可以写一些关于你自己或你的网站的介绍文本。为了示例，这里放上一段占位符文字：</p>
-    <p>本网页的目标是展示如何仅使用 HTML 和 CSS 创建一个响应式、多段落的静态页面。</p>
-  </section>
+    <!-- 3. 作业提交 -->
+    <section>
+      <h2>3. 作业提交</h2>
+      <div class="grid-2">
+        <!-- 宣传海报 -->
+        <div>
+          <h3 style="color: var(--primary); font-size: 1.25rem; margin-bottom: .75rem;">3.1 宣传海报制作</h3>
+          <ul>
+            <li>海报作用：用于作品宣传与展览</li>
+            <li>制作提示：可截取几张程序画面拼图</li>
+            <li>规格：<strong>A3 竖版</strong>（297 mm × 420 mm），300 dpi，JPG，≤ 5 MB</li>
+          </ul>
+        </div>
+        <!-- 文件提交 -->
+        <div>
+          <h3 style="color: var(--primary); font-size: 1.25rem; margin-bottom: .75rem;">3.2 作业打包上传</h3>
+          <p>截止日期：<span class="deadline">6 月 13 日</span></p>
+          <ul>
+            <li>22‑3 班网盘链接：<a href="https://pan.baidu.com/disk/main#/transfer/send?surl=ACgAAAAAABOEFg" target="_blank">点击上传</a></li>
+            <li>22‑2 班网盘链接：<a href="https://pan.baidu.com/disk/main#/transfer/send?surl=ABEAAAAAABNmGw" target="_blank">点击上传</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- 示意图 -->
+      <img src="889b70e4-5171-417f-8698-a345a951edef.png" alt="小组提交材料示意图" style="margin-top: 2rem;" />
+    </section>
 
-  <section id="features">
-    <h2>网站特色</h2>
-    <ul>
-      <li>轻量级，无任何 JavaScript 依赖</li>
-      <li>响应式布局，在手机和桌面端均可良好展示</li>
-      <li>简约的配色和排版，易于自定义</li>
-      <li>适合作为快速原型或个人简介页面</li>
-    </ul>
-    <p><a href="#contact" class="btn">立即联系</a></p>
-  </section>
+    <!-- 4. 评分 -->
+    <section>
+      <h2>4. 评分方式</h2>
+      <p>第 16 周答辩当天，请大家登录 <strong>学习通 → 班级活动 → 项目期末评分</strong> 模块，完成组内与组间互评。</p>
+      <p class="note">若当天未完成互评，将扣除相应分数。</p>
+    </section>
 
-  <section id="contact">
-    <h2>联系我们</h2>
-    <p>如果你对本页面有任何建议或想法，欢迎与你的联系方式放在这里，例如：</p>
-    <p>Email: example@example.com</p>
-    <p>Copyright © 2025 Example. All rights reserved.</p>
-  </section>
-
-  <footer>
-    <p>感谢你的访问！</p>
-  </footer>
+    <footer>
+      © 2025 联合创作与开发课程
+    </footer>
+  </div>
 </body>
 </html>
